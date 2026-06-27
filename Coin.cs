@@ -11,20 +11,26 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // En kritik yer: Bu mesaj konsolda hiç çıkmıyorsa, trigger hiç tetiklenmiyor demektir.
+        Debug.Log("TETİKLENDİ! Temas edilen obje: " + collision.gameObject.name);
+
         if (collision.CompareTag("Player"))
         {
-            // Skoru 1 artır
+            Debug.Log("BAŞARILI: 'Player' etiketi doğrulandı, skor artıyor.");
+
             GameManager.score += 1;
 
-            // Sesi çal
             if (coinSound != null && coinSound.clip != null)
             {
-                // Sesi kameranın olduğu yere çaldır (çünkü coin yok olunca ses de kesilmesin)
                 AudioSource.PlayClipAtPoint(coinSound.clip, transform.position);
             }
 
-            // Coin'i sil
             Destroy(gameObject);
+        }
+        else
+        {
+            // Eğer "Player" etiketi yoksa, konsolda objenin gerçek tag'ini göreceksin.
+            Debug.Log("HATA: Çarptığım objenin etiketi 'Player' değil. Mevcut etiket: " + collision.tag);
         }
     }
 }
