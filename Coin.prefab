@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5352276852120929975}
   - component: {fileID: 4660648714959908551}
   - component: {fileID: 4863631271274433956}
+  - component: {fileID: -4500632974205991918}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -236,3 +237,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-4500632974205991918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5256554992785776926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67219e793091aa34ea7609fb9b2ccd28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Coin
