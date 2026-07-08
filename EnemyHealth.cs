@@ -89,7 +89,7 @@ public class EnemyHealth : MonoBehaviour
         if (spawner != null)
         {
             spawner.enemyHealth += 10f;      // Her öldüğünde +5 HP
-            spawner.enemyDamage += 1f;      // +1 Damage
+            spawner.enemyDamage += 10f;      // +1 Damage
             spawner.enemySpeed += 1f;     // Biraz daha hızlı
 
             spawner.StartSpawnRoutine();
@@ -120,5 +120,9 @@ public class EnemyHealth : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+    public float GetHealthPercent()
+    {
+        return currentHealth / maxHealth;
     }
 }
