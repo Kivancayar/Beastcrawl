@@ -11,6 +11,12 @@ public class MovePlayer : MonoBehaviour
     public LayerMask groundLayer;
     private bool isGrounded;
 
+    [Header("M1 Attack")]
+    public Transform attackPoint;
+    public float attackRange = 1f;
+    public float attackDamage = 20f;
+    public LayerMask enemyLayer;
+
     [Header("Dash ve Knockback")]
     public float dashForce = 20f;
     public float dashTime = 0.2f;
@@ -69,6 +75,7 @@ public class MovePlayer : MonoBehaviour
         HandleMovement();
         HandleLaser();
         RegenerateMana();
+        HandleM1Attack();
     }
 
     void HandleMovement()
@@ -163,5 +170,23 @@ public class MovePlayer : MonoBehaviour
         isKnockback = true;
         yield return new WaitForSeconds(0.2f);
         isKnockback = false;
+    }
+    void HandleM1Attack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("M1 Attack!");
+
+            Collider2D[] enemies = Physics2D.OverlapCircleAll(
+                attackPoint.position,
+                attackRange,
+                enemyLayer
+            );
+
+            foreach (Collider2D enemy in enemies)
+            {
+                enemy.GetComponent<EnemyHealth>()?.TakeDamage(attackDamage);
+            }
+        }
     }
 }
