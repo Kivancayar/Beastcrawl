@@ -17,6 +17,9 @@ public class MovePlayer : MonoBehaviour
     public float attackDamage = 20f;
     public LayerMask enemyLayer;
 
+    public float attackCooldown = 0.4f;
+    private float nextAttackTime = 0f;
+
     [Header("Dash ve Knockback")]
     public float dashForce = 20f;
     public float dashTime = 0.2f;
@@ -173,8 +176,10 @@ public class MovePlayer : MonoBehaviour
     }
     void HandleM1Attack()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.time >= nextAttackTime)
         {
+            nextAttackTime = Time.time + attackCooldown;
+
             Debug.Log("M1 Attack!");
 
             Collider2D[] enemies = Physics2D.OverlapCircleAll(
@@ -188,5 +193,12 @@ public class MovePlayer : MonoBehaviour
                 enemy.GetComponent<EnemyHealth>()?.TakeDamage(attackDamage);
             }
         }
+    }
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
